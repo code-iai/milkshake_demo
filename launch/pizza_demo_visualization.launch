@@ -1,0 +1,10 @@
+<launch>
+  <!-- Start rviz with the configuration from chemlab_context package /-->
+  <arg name="milkshake_rviz_config" default="$(find milkshake_demo)/config/milkshake_demo_visualization.rviz"/>
+  <node name="milkshake_demo_visualization" 
+        pkg="rviz" 
+        type="rviz" 
+        respawn="true"
+        args="-d $(arg milkshake_rviz_config)"/>
+ 
+</launch>

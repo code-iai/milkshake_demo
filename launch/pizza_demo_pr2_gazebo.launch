@@ -1,0 +1,64 @@
+<launch>
+
+  <!--<node name="map_server" pkg="map_server" type="map_server" args="$(find ltfnp_maps)/maps/shopping_area.yaml" />-->
+  <!--node name="map_server" pkg="map_server" type="map_server" args="$(find ltfnp_maps)/maps/shopping_area_new.yaml" /-->
+
+  <!-- More tf related things -->
+  <node name="static_world_frame" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 map odom_combined 100" />
+
+  <!-- Load reasoning. TODO: get rid of the dep on ltfnp_reasoning. -->
+  <param name="initial_package" type="string" value="milkshake_demo" />
+  <node name="json_prolog" pkg="json_prolog" type="json_prolog_node" output="screen"/>
+
+  <!-- TODO: point to a package here, s.t. its name matches the SimModels repo path for this PR2 description -->
+  <param name="robot_description_lowres" command="$(find xacro)/xacro.py '$(find pr2_description_lowres)/robots/pr2.urdf.xacro'" />
+
+  <env name="GAZEBO_MODEL_PATH" value="$(find milkshake_demo)/models" />
+  
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find milkshake_demo)/worlds/empty_world_with_plugins.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="false"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+  
+  <!-- Start PR2 Robot -->
+  <!-- Startup PR2 without any mechanism controllers -->
+  <!-- send pr2 urdf to param server -->
+  <!-- TODO: point to a package here, s.t. its name matches the SimModels repo path for this PR2 description -->
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find milkshake_demo)/models/altered_pr2/pr2.urdf.xacro'" />
+
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <node name="spawn_pr2_model" pkg="gazebo_ros" type="spawn_model" args="$(optenv ROBOT_INITIAL_POSE) -unpause -urdf -param robot_description -model pr2 -ros_namespace /gazebo" respawn="false" output="screen" />
+
+  <!-- default bringup script -->
+  <include file="$(find pr2_gazebo)/launch/pr2_bringup.launch" />
+
+  <!-- Load and Start Default Controllers -->
+  <include file="$(find pr2_controller_configuration_gazebo)/launch/pr2_default_controllers.launch" />
+  
+  <!-- Spawn the kitchen -->
+  <include file="$(find iai_kitchen)/launch/gazebo_spawn_kitchen.launch"/>
+
+  <!-- More tf related things -->
+  <!--<node name="static_world_frame" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 map odom_combined 100" />-->
+
+  <!-- Web-related nodes for visualization in browser -->
+  <node name="tf2_web_republisher" pkg="tf2_web_republisher" type="tf2_web_republisher" args="" respawn="true" output="screen" />
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
+  
+  <!--TODO: get rid of these deps -->
+  <include file="$(find pr2_moveit_node)/launch/move_group.launch"/>
+  <include file="$(find pr2_moveit_node)/launch/nav_pcontroller.launch"/>
+
+  <!-- A no-color version of the PR2, to be less distracting-->
+  <param name="robot_description_nocol" textfile="$(find milkshake_demo)/models/pr2.urdf"/>
+
+
+
+  <node name="semrec_ros" pkg="semrec" type="semrec" args="" output="screen"></node>
+  
+</launch>
+

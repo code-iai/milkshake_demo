@@ -1,0 +1,975 @@
+Panels:
+  - Class: rviz/Displays
+    Help Height: 78
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /Status1
+      Splitter Ratio: 0.5
+    Tree Height: 775
+  - Class: rviz/Selection
+    Name: Selection
+  - Class: rviz/Tool Properties
+    Expanded:
+      - /2D Pose Estimate1
+      - /2D Nav Goal1
+      - /Publish Point1
+    Name: Tool Properties
+    Splitter Ratio: 0.588679
+  - Class: rviz/Views
+    Expanded:
+      - /Current View1
+    Name: Views
+    Splitter Ratio: 0.5
+  - Class: rviz/Time
+    Experimental: false
+    Name: Time
+    SyncMode: 0
+    SyncSource: ""
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.5
+      Cell Size: 1
+      Class: rviz/Grid
+      Color: 160; 160; 164
+      Enabled: true
+      Line Style:
+        Line Width: 0.03
+        Value: Lines
+      Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 10
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        base_bellow_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        base_footprint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        base_laser_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bl_caster_l_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bl_caster_r_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bl_caster_rotation_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        br_caster_l_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        br_caster_r_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        br_caster_rotation_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        double_stereo_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        fl_caster_l_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        fl_caster_r_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        fl_caster_rotation_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        fr_caster_l_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        fr_caster_r_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        fr_caster_rotation_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        head_mount_kinect_ir_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        head_mount_kinect_ir_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        head_mount_kinect_rgb_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        head_mount_kinect_rgb_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        head_mount_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        head_mount_prosilica_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        head_mount_prosilica_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        head_pan_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        head_plate_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        head_tilt_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        high_def_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        high_def_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        imu_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        l_elbow_flex_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        l_forearm_cam_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        l_forearm_cam_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        l_forearm_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        l_forearm_roll_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        l_gripper_l_finger_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        l_gripper_l_finger_tip_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        l_gripper_l_finger_tip_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        l_gripper_led_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        l_gripper_motor_accelerometer_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        l_gripper_motor_screw_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        l_gripper_motor_slider_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        l_gripper_palm_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        l_gripper_r_finger_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        l_gripper_r_finger_tip_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        l_gripper_tool_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        l_shoulder_lift_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        l_shoulder_pan_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        l_torso_lift_side_plate_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        l_upper_arm_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        l_upper_arm_roll_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        l_wrist_flex_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        l_wrist_roll_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        laser_tilt_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        laser_tilt_mount_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        narrow_stereo_l_stereo_camera_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        narrow_stereo_l_stereo_camera_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        narrow_stereo_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        narrow_stereo_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        narrow_stereo_r_stereo_camera_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        narrow_stereo_r_stereo_camera_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        projector_wg6802418_child_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        projector_wg6802418_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        r_elbow_flex_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        r_forearm_cam_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        r_forearm_cam_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        r_forearm_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        r_forearm_roll_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        r_gripper_l_finger_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        r_gripper_l_finger_tip_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        r_gripper_l_finger_tip_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        r_gripper_led_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        r_gripper_motor_accelerometer_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        r_gripper_motor_screw_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        r_gripper_motor_slider_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        r_gripper_palm_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        r_gripper_r_finger_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        r_gripper_r_finger_tip_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        r_gripper_tool_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        r_shoulder_lift_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        r_shoulder_pan_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        r_torso_lift_side_plate_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        r_upper_arm_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        r_upper_arm_roll_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        r_wrist_flex_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        r_wrist_roll_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        sensor_mount_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        torso_lift_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        torso_lift_motor_screw_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wide_stereo_l_stereo_camera_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wide_stereo_l_stereo_camera_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wide_stereo_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wide_stereo_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wide_stereo_r_stereo_camera_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wide_stereo_r_stereo_camera_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+      Name: RobotModel
+      Robot Description: robot_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        pizza_cutter:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: cutter_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        pizza_plate:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: pizza_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        fridge_area:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        fridge_area_footprint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        fridge_area_lower_drawer_handle:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        fridge_area_lower_drawer_main:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        iai_fridge_door:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        iai_fridge_door_handle:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        iai_fridge_main:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_island:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_island_footprint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        kitchen_island_left_lower_drawer_handle:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_island_left_lower_drawer_main:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_island_left_panel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_island_left_upper_drawer_handle:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_island_left_upper_drawer_main:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_island_middle_lower_drawer_handle:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_island_middle_lower_drawer_main:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_island_middle_panel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_island_middle_upper_drawer_handle:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_island_middle_upper_drawer_main:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_island_right_lower_drawer_handle:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_island_right_lower_drawer_main:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_island_right_panel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_island_right_upper_drawer_handle:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_island_right_upper_drawer_main:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_island_stove:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_island_surface:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_wall_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_wall_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_wall_3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_wall_4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_wall_5:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_wall_6:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        kitchen_walls:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        oven_area_area:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        oven_area_area_footprint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        oven_area_area_left_drawer_handle:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        oven_area_area_left_drawer_main:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        oven_area_area_middle_lower_drawer_handle:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        oven_area_area_middle_lower_drawer_main:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        oven_area_area_middle_upper_drawer_handle:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        oven_area_area_middle_upper_drawer_main:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        oven_area_area_right_drawer_handle:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        oven_area_area_right_drawer_main:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        oven_area_oven_door:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        oven_area_oven_door_handle:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        oven_area_oven_knob_oven:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        oven_area_oven_knob_stove_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        oven_area_oven_knob_stove_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        oven_area_oven_knob_stove_3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        oven_area_oven_knob_stove_4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        oven_area_oven_main:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        oven_area_oven_panel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        room_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        sink_area:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        sink_area_dish_washer_door:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        sink_area_dish_washer_door_handle:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        sink_area_dish_washer_main:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        sink_area_footprint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        sink_area_left_bottom_drawer_handle:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        sink_area_left_bottom_drawer_main:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        sink_area_left_middle_drawer_handle:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        sink_area_left_middle_drawer_main:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        sink_area_left_upper_drawer_handle:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        sink_area_left_upper_drawer_main:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        sink_area_right_panel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        sink_area_sink:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        sink_area_surface:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        sink_area_trash_drawer_handle:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        sink_area_trash_drawer_main:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        table_area_main:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        world:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+      Name: RobotModel
+      Robot Description: kitchen_description
+      TF Prefix: iai_kitchen
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: visualization_marker
+      Name: Marker
+      Namespaces:
+        {}
+      Queue Size: 100
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: map
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz/Interact
+      Hide Inactive Objects: true
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+    - Class: rviz/FocusCamera
+    - Class: rviz/Measure
+    - Class: rviz/SetInitialPose
+      Topic: /initialpose
+    - Class: rviz/SetGoal
+      Topic: /move_base_simple/goal
+    - Class: rviz/PublishPoint
+      Single click: true
+      Topic: /clicked_point
+  Value: true
+  Views:
+    Current:
+      Class: rviz/Orbit
+      Distance: 2.79999
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.06
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Focal Point:
+        X: -0.162079
+        Y: 1.31489
+        Z: 1.04703
+      Name: Current View
+      Near Clip Distance: 0.01
+      Pitch: 0.4904
+      Target Frame: <Fixed Frame>
+      Value: Orbit (rviz)
+      Yaw: 3.0604
+    Saved: ~
+Window Geometry:
+  Displays:
+    collapsed: false
+  Height: 1056
+  Hide Left Dock: false
+  Hide Right Dock: false
+  QMainWindow State: 000000ff00000000fd00000004000000000000016a00000396fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006400fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000002800000396000000dd00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f00000396fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000002800000396000000b000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000073f0000003efc0100000002fb0000000800540069006d006501000000000000073f000002f600fffffffb0000000800540069006d00650100000000000004500000000000000000000004ba0000039600000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Selection:
+    collapsed: false
+  Time:
+    collapsed: false
+  Tool Properties:
+    collapsed: false
+  Views:
+    collapsed: false
+  Width: 1855
+  X: 65
+  Y: 24

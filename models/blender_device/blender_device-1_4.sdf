@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <model name="blender_device">
+    <link name="blender_device">
+      <gravity>false</gravity>
+      <inertial>
+        <mass>0.02</mass>
+      </inertial>
+      <collision name="blender_device_collision">
+        <geometry><box><size>0.0001 0.0001 0.0001</size></box></geometry>
+          <surface>
+            <contact>
+              <collide_without_contact>true</collide_without_contact>
+            </contact>
+          </surface>
+      </collision>
+      <visual name="blender_device">
+        <geometry>
+          <mesh>
+            <uri>model://blender_device/meshes/blender_device.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

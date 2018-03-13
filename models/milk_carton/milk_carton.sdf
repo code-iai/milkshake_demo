@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="milk_carton">
+    <link name="milk_carton">
+      <gravity>false</gravity>
+      <inertial>
+        <mass>0.02</mass>
+      </inertial>
+      <collision name="milk_carton_collision">
+        <geometry><box><size>0.0001 0.0001 0.0001</size></box></geometry>
+          <surface>
+            <contact>
+              <collide_without_contact>true</collide_without_contact>
+            </contact>
+          </surface>
+      </collision>
+      <visual name="milk_carton_visual">
+        <geometry>
+          <mesh>
+            <uri>model://milk_carton/meshes/milk_carton.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

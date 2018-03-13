@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<gazebo version="1.2">
+  <model name="mug">
+    <link name="mug">
+      <gravity>false</gravity>
+      <inertial>
+        <mass>0.02</mass>
+      </inertial>
+      <collision name="mug_collision">
+        <geometry><box><size>0.0001 0.0001 0.0001</size></box></geometry>
+          <surface>
+            <contact>
+              <collide_without_contact>true</collide_without_contact>
+            </contact>
+          </surface>
+      </collision>
+      <visual name="mug_visual">
+        <geometry>
+          <mesh>
+            <uri>model://mug/meshes/mug.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</gazebo>

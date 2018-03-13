@@ -1,0 +1,54 @@
+<launch>
+
+  <!-- Load reasoning. -->
+  <param name="initial_package" type="string" value="milkshake_demo" />
+  <node name="json_prolog" pkg="json_prolog" type="json_prolog_node" output="screen"/>
+  
+
+  <!--<include file="$(find iai_kitchen)/launch/upload_kitchen.launch"/>-->
+  <include file="$(find iai_pr2_description)/launch/upload_pr2.launch" />
+
+  <node pkg="iai_naive_kinematics_sim" type="simulator" 
+        name="pr2" output="screen">
+    <rosparam command="load"
+        file="$(find milkshake_demo)/config/sim_config.yaml" />
+    <remap from="~joint_states" to="/joint_states" />
+  </node>
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher"
+        name="robot_state_publisher" />
+
+  <node pkg="tf2_ros" type="buffer_server" name="tf2_buffer_server" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="fake_localization"
+        output="screen" args="0 0 0 0 0 0 map odom" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="fake_odometry"
+        output="screen" args="0 0 0 0 0 0 odom base_footprint" />
+
+  <include file="$(find giskard_pr2)/launch/whole_body_controller.launch">
+    <arg name="sim" value="true" />
+  </include>
+
+  <!-- Web-related nodes for visualization in browser -->
+  <node name="tf2_web_republisher" pkg="tf2_web_republisher" type="tf2_web_republisher" args="" respawn="true" output="screen" />
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch">
+    <arg name="port" value="$(optenv ROSBRIDGE_WEBPORT)" />
+  </include>
+  
+
+  <!-- Spawn pizza plate, pizza cutter -->
+  <param name="banana_description" textfile="$(find milkshake_demo)/models/banana/banana.urdf" />
+  <param name="blender_device_description" textfile="$(find milkshake_demo)/models/blender_device/blender_device.urdf" />
+  <param name="blender_bowl_description" textfile="$(find milkshake_demo)/models/blender_bowl/blender_bowl.urdf" />
+  <param name="bowl_description" textfile="$(find milkshake_demo)/models/bowl/bowl.urdf" />
+  <param name="milk_carton_description" textfile="$(find milkshake_demo)/models/milk_carton/milk_carton.urdf" />
+  <param name="mug_description" textfile="$(find milkshake_demo)/models/mug/mug.urdf" />
+  <param name="strawberry_description" textfile="$(find milkshake_demo)/models/straberry/strawberry.urdf" />
+
+
+  <!-- A no-color version of the PR2, to be less distracting-->
+  <param name="robot_description_nocol" textfile="$(find pizza_demo)/models/pr2.urdf"/>
+  
+</launch>
+
