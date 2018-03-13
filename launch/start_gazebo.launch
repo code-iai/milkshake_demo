@@ -44,7 +44,7 @@
   <param name="bowl_description" textfile="$(find milkshake_demo)/models/bowl/bowl.urdf" />
   <param name="milk_carton_description" textfile="$(find milkshake_demo)/models/milk_carton/milk_carton.urdf" />
   <param name="mug_description" textfile="$(find milkshake_demo)/models/mug/mug.urdf" />
-  <param name="strawberry_description" textfile="$(find milkshake_demo)/models/straberry/strawberry.urdf" />
+  <param name="strawberry_description" textfile="$(find milkshake_demo)/models/strawberry/strawberry.urdf" />
 
 
   <!-- A no-color version of the PR2, to be less distracting-->

@@ -131,8 +131,8 @@
     (setf (cpl-impl:value *pose-strawberry*) strawberry-poses)
     (mapcar (lambda (strawberry-pose index)
               (roslisp:publish (ensure-mrk-publisher)
-                               (make-mesh-marker-msg base-frame-name mesh-resource :frame-locked 1 :pose strawberry-pose :namespace "strawberry" :id index))
-            strawberry-poses indices))))
+                               (make-mesh-marker-msg base-frame-name mesh-resource :frame-locked 1 :pose strawberry-pose :namespace "strawberry" :id index)))
+            strawberry-poses indices)))
 
 (defun place-banana-in-hiding ()
   (let* ((mesh-resource (cdr (assoc "banana" *marker-object-mesh-paths* :test #'equal)))
@@ -151,6 +151,6 @@
     (setf (cpl-impl:value *pose-strawberry*) strawberry-poses)
     (mapcar (lambda (strawberry-pose index)
               (roslisp:publish (ensure-mrk-publisher)
-                               (make-mesh-marker-msg "map" mesh-resource :frame-locked 1 :pose strawberry-pose :namespace "strawberry" :id index))
-            strawberry-poses indices))))
+                               (make-mesh-marker-msg "map" mesh-resource :frame-locked 1 :pose strawberry-pose :namespace "strawberry" :id index)))
+            strawberry-poses indices)))
 

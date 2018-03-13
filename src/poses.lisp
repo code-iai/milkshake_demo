@@ -71,7 +71,7 @@
 (defparameter init-milk-carton (cl-tf:make-transform-stamped "map" "milk-carton" 0 (cl-tf:make-3d-vector 0.7 -0.25 (+ floor-level-map floor-level-milk-carton)) null-quat))
 (defparameter init-mug (cl-tf:make-transform-stamped "map" "mug" 0 (cl-tf:make-3d-vector 0.7 -0.5 (+ floor-level-map floor-level-mug)) null-quat))
 
-(defparameter blender-device-to-bowl (cl-tf:make-transform (cl-tf:make-3d-vector -0.017 0 0.129) null-quat)
+(defparameter blender-device-to-bowl (cl-tf:make-transform (cl-tf:make-3d-vector -0.017 0 0.129) null-quat))
 (defparameter blender-bowl-to-pouring (cl-tf:make-transform (cl-tf:make-3d-vector 0.127 0 0.074) null-quat))
 (defparameter milk-carton-to-pouring (cl-tf:make-transform (cl-tf:make-3d-vector 0.036 0 0.126) null-quat))
 (defparameter bowl-to-pouring (cl-tf:make-transform (cl-tf:make-3d-vector 0.118 0 0.043) null-quat))
