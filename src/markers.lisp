@@ -36,6 +36,7 @@
 
 (defparameter *strawberry-color* (roslisp:make-message "std_msgs/ColorRGBA" :a 1 :r 0.9 :g 0.1 :b 0.1))
 (defparameter *banana-color* (roslisp:make-message "std_msgs/ColorRGBA" :a 1 :r 0.9 :g 0.9 :b 0.1))
+(defparameter *object-color* (roslisp:make-message "std_msgs/ColorRGBA" :a 1 :r 0.8 :g 0.7 :b 0.3))
 
 (defparameter *object-names* `("banana" "blender-device" "blender-bowl" "bowl" "milk-carton" "mug" "strawberry"))
 
@@ -62,8 +63,22 @@
 
 (roslisp-utilities:register-ros-cleanup-function destroy-mrk-publisher)
 
+(defun tr->ps (transform)
+  (let* ((v (cl-transforms:translation transform))
+         (r (cl-transforms:rotation transform))
+         (x (cl-transforms:x v))
+         (y (cl-transforms:y v))
+         (z (cl-transforms:z v))
+         (qx (cl-transforms:x r))
+         (qy (cl-transforms:y r))
+         (qz (cl-transforms:z r))
+         (qw (cl-transforms:w r)))
+    (roslisp:make-message "geometry_msgs/Pose"
+      :position (roslisp:make-message "geometry_msgs/Point" :x x :y y :z z)
+      :orientation (roslisp:make-message "geometry_msgs/Quaternion" :x qx :y qy :z qz :w qw))))
+
 (defun make-mrk-msg (base-frame-name &key
-                      (pose (tr->ps (cl-transforms:make-identity-transform))) (action *RVIZ-ADD-MARKER*) (id 0) (type 0) (color *object-color*) (frame-locked 0) (colors (coerce nil 'vector))
+                      (pose (cl-transforms:make-identity-transform)) (action *RVIZ-ADD-MARKER*) (id 0) (type 0) (color *object-color*) (frame-locked 0) (colors (coerce nil 'vector))
                       (mesh-resource "") (alpha 1) (namespace "cutplan") (scale (roslisp:make-message "geometry_msgs/Vector3" :x 1 :y 1 :z 1)) (points (coerce nil 'vector)))
   (roslisp:with-fields (a r g b) color
     (let* ((color (roslisp:make-message "std_msgs/ColorRGBA" :a (* a alpha) :r r :g g :b b)))
@@ -74,7 +89,7 @@
                             :frame_locked frame-locked
                             :action action
                             :type type
-                            :pose pose
+                            :pose (tr->ps pose)
                             :scale scale
                             :color color
                             :colors colors
@@ -82,7 +97,7 @@
                             :mesh_resource mesh-resource))))
 
 (defun make-mesh-marker-msg (base-frame-name mesh-resource &key
-                             (color *object-color*) (frame-locked 0) (id 0) (action *RVIZ-ADD-MARKER*) (pose (tr->ps (cl-transforms:make-identity-transform))) (alpha 1) (namespace "cutplan"))
+                             (color *object-color*) (frame-locked 0) (id 0) (action *RVIZ-ADD-MARKER*) (pose (cl-transforms:make-identity-transform)) (alpha 1) (namespace "cutplan"))
   (make-mrk-msg base-frame-name :frame-locked frame-locked :color color :id id :action action :pose pose :type 10 :alpha alpha :namespace namespace :mesh-resource mesh-resource))
 
 (defun publish-object-marker (object-name)
@@ -90,7 +105,7 @@
          (transforms (if (listp transforms)
                        transforms
                        (list transforms)))
-         (base-frame (cl-tf:frame-id (car transforms)))
+         (base-frame-name (cl-tf:frame-id (car transforms)))
          (indices (alexandria:iota (length transforms)))
          (mesh-resource (cdr (assoc object-name *marker-object-mesh-paths* :test #'equal))))
     (if (equal object-name "strawberry")
