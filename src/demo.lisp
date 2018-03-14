@@ -92,7 +92,8 @@
          )
     (loop
       (let ((c (rem (+ a b) 97)))
-        (roslisp:wait-duration 1)
+        (initial-marker-placement)
+        (roslisp:wait-duration 3)
         ;;(mapcar #'publish-marker-object *marker-object-fluents*)
         (format t "Tick-tock ~a: ~a.~%" s c)
         (setf s (+ s 1))
