@@ -93,7 +93,9 @@
     (loop
       (let ((c (rem (+ a b) 97)))
         (initial-marker-placement)
-        (roslisp:wait-duration 3)
+        (cram-process-modules:with-process-modules-running (pr2-pms::pr2-arms-pm pr2-pms::pr2-grippers-pm pr2-pms::pr2-ptu-pm pr2-pms::pr2-base-pm)
+          (press-blender-button :left))
+        (roslisp:wait-duration 1)
         ;;(mapcar #'publish-marker-object *marker-object-fluents*)
         (format t "Tick-tock ~a: ~a.~%" s c)
         (setf s (+ s 1))

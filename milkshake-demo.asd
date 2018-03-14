@@ -28,4 +28,6 @@
             ((:file "package")
              (:file "poses" :depends-on ("package"))
              (:file "markers" :depends-on ("poses"))
-             (:file "demo" :depends-on ("markers"))))))
+             (:file "arms" :depends-on ("package"))
+             (:file "physical-exposure" :depends-on ("poses" "markers" "arms"))
+             (:file "demo" :depends-on ("markers" "physical-exposure"))))))

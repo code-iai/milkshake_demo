@@ -65,16 +65,19 @@
 
 (defparameter floor-level-map 0.9)
 
-(defparameter init-banana (cl-tf:make-transform-stamped "map" "banana" 0 (cl-tf:make-3d-vector 1 0.25 (- floor-level-map floor-level-banana)) null-quat))
-(defparameter init-blender-device (cl-tf:make-transform-stamped "map" "blender-device" 0 (cl-tf:make-3d-vector 1 0 (- floor-level-map floor-level-blender-device)) null-quat))
-(defparameter init-bowl (cl-tf:make-transform-stamped "map" "bowl" 0 (cl-tf:make-3d-vector 1 0.5 (- floor-level-map floor-level-bowl)) null-quat))
-(defparameter init-milk-carton (cl-tf:make-transform-stamped "map" "milk-carton" 0 (cl-tf:make-3d-vector 1 -0.25 (- floor-level-map floor-level-milk-carton)) null-quat))
-(defparameter init-mug (cl-tf:make-transform-stamped "map" "mug" 0 (cl-tf:make-3d-vector 1 -0.5 (- floor-level-map floor-level-mug)) null-quat))
+(defparameter init-banana (cl-tf:make-transform-stamped "map" "banana" 0 (cl-tf:make-3d-vector 0.9 0.25 (- floor-level-map floor-level-banana)) null-quat))
+(defparameter init-blender-device (cl-tf:make-transform-stamped "map" "blender-device" 0 (cl-tf:make-3d-vector 0.9 0 (- floor-level-map floor-level-blender-device)) null-quat))
+(defparameter init-bowl (cl-tf:make-transform-stamped "map" "bowl" 0 (cl-tf:make-3d-vector 0.9 0.5 (- floor-level-map floor-level-bowl)) null-quat))
+(defparameter init-milk-carton (cl-tf:make-transform-stamped "map" "milk-carton" 0 (cl-tf:make-3d-vector 0.9 -0.25 (- floor-level-map floor-level-milk-carton)) null-quat))
+(defparameter init-mug (cl-tf:make-transform-stamped "map" "mug" 0 (cl-tf:make-3d-vector 0.9 -0.5 (- floor-level-map floor-level-mug)) null-quat))
 
 (defparameter blender-device-to-bowl (cl-tf:make-transform (cl-tf:make-3d-vector -0.017 0 0.129) null-quat))
 (defparameter blender-bowl-to-pouring (cl-tf:make-transform (cl-tf:make-3d-vector 0.127 0 0.074) null-quat))
 (defparameter milk-carton-to-pouring (cl-tf:make-transform (cl-tf:make-3d-vector 0.036 0 0.126) null-quat))
 (defparameter bowl-to-pouring (cl-tf:make-transform (cl-tf:make-3d-vector 0.118 0 0.043) null-quat))
+
+(defparameter blender-bowl-entrance (cl-tf:make-transform (cl-tf:make-3d-vector 0 0 0.12) null-quat))
+(defparameter mug-entrance (cl-tf:make-transform (cl-tf:make-3d-vector 0 0 0.08) null-quat))
 
 (defparameter *grasp-poses* `(("banana" . ,grasp-banana)
                               ("blender-bowl" . ,grasp-blender-bowl)
