@@ -29,5 +29,6 @@
              (:file "poses" :depends-on ("package"))
              (:file "markers" :depends-on ("poses"))
              (:file "arms" :depends-on ("package"))
-             (:file "physical-exposure" :depends-on ("poses" "markers" "arms"))
-             (:file "demo" :depends-on ("markers" "physical-exposure"))))))
+             (:file "kinematic-controllability" ("poses" "arms" "markers"))
+             (:file "physical-exposure" :depends-on ("kinematic-controllability"))
+             (:file "demo" :depends-on ("physical-exposure"))))))

@@ -42,10 +42,46 @@
                                               (cl-tf:rotation press-pose))))
     (move-arm-poses arm (list pre-press-pose press-pose pre-press-pose))))
 
-(defclass physical-exposure ()
-  ((physical-condition :initarg :physical-condition :initform nil :reader physical-condition)
-   (instrument :initarg :instrument :initform nil :reader instrument)
-   (actee :initarg :actee :initform nil :reader actee)))
+(defclass physical-exposure (instrumental-schema)
+  ((physical-condition :initarg :physical-condition :initform nil :accessor physical-condition)))
 
 (defparameter *physical-exposures* (cpl-impl:make-fluent :name :physical-exposures :value nil))
+
+(defun check-physical-exposure (exposures actees instrument physical-condition)
+  nil)
+
+(defun init-physical-exposures ()
+  (setf (cpl-impl:value *physical-exposures*)
+        nil))
+
+(start-simulate (actees physical-condition)
+  (mapcar (lambda (actee)
+            (cond
+              ((and (equal physical-condition "blend") (equal actee "banana"))
+                (place-banana-in-hiding))
+              ((and (equal physical-condition "blend") (equal actee "strawberry"))
+                (place-strawberry-in-hiding))
+              (T nil)))
+          actees))
+
+(defun terminate-physical-exposure (instrument physical-condition)
+  (let* ((already-established (check-physical-exposure (cpl-impl:value *physical-exposures*) T instrument physical-condition)))
+    (when already-established
+      (press-blender-button :left)
+      (setf (cpl-impl:value *physical-exposures*)
+            (remove-instrumental-schema (cpl-impl:value *physical-exposures*) T instrument)))))
+
+(defun establish-physical-exposure (actees instrument physical-condition)
+  (let* ((already-established (check-physical-exposure (cpl-impl:value *physical-exposures*) actees instrument physical-condition)))
+    (unless already-established
+      (establish-kinematic-controllability actees instrument physical-condition)
+      (press-blender-button :left)
+      (start-simulate actees physical-condition)
+      (establish-kinematic-controllability "milkshake" instrument nil)
+      (setf (cpl-impl:value *physical-exposures*)
+            (cons (make-instance 'physical-exposure
+                                 :physical-condition physical-condition
+                                 :instrument instrument
+                                 :actee actees)
+                  (cpl-impl:value *physical-exposures*))))))
 
