@@ -85,6 +85,9 @@
   (prac2cram:prac2cram-server *pracsimserver-plan-matchings* #'cancel-function)
   (roslisp:ros-info (milkshake-demo) "Started a prac2cram server")
   (initial-marker-placement)
+  (cpl-impl:top-level
+    (cram-process-modules:with-process-modules-running (pr2-pms::pr2-arms-pm)
+      (move-arms-up)))
   (let* ((a 1) (b 1) (s 1)
          ;;(thr (sb-thread:make-thread (lambda ()
          ;;                              (cpl-impl:top-level
@@ -93,8 +96,9 @@
     (loop
       (let ((c (rem (+ a b) 97)))
         (initial-marker-placement)
-        (cram-process-modules:with-process-modules-running (pr2-pms::pr2-arms-pm pr2-pms::pr2-grippers-pm pr2-pms::pr2-ptu-pm pr2-pms::pr2-base-pm)
-          (press-blender-button :left))
+        (cpl-impl:top-level
+          (cram-process-modules:with-process-modules-running (pr2-pms::pr2-arms-pm pr2-pms::pr2-grippers-pm pr2-pms::pr2-ptu-pm pr2-pms::pr2-base-pm)
+            (press-blender-button :left)))
         (roslisp:wait-duration 1)
         ;;(mapcar #'publish-marker-object *marker-object-fluents*)
         (format t "Tick-tock ~a: ~a.~%" s c)

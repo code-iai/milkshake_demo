@@ -33,8 +33,14 @@
   (let* ((blender-device-pose (cpl-impl:value *pose-blender-device*))
          (press-pose (cl-tf:transform* blender-device-pose press-blender-device))
          (pre-press-offset (cl-tf:make-transform (cl-tf:make-3d-vector -0.08 0 0) (cl-tf:euler->quaternion)))
-         (pre-press-pose (cl-tf:transform* blender-device-pose press-blender-device pre-press-offset)))
-    (move-arm-poses arm (list pre-press-pose press-pose pre-press-pose)))
+         (pre-press-pose (cl-tf:transform* blender-device-pose press-blender-device pre-press-offset))
+         (pre-press-pose (cl-tf:make-pose-stamped (cl-tf:frame-id blender-device-pose) 0
+                                                  (cl-tf:translation pre-press-pose)
+                                                  (cl-tf:rotation pre-press-pose)))
+         (press-pose (cl-tf:make-pose-stamped (cl-tf:frame-id blender-device-pose) 0
+                                              (cl-tf:translation press-pose)
+                                              (cl-tf:rotation press-pose))))
+    (move-arm-poses arm (list pre-press-pose press-pose pre-press-pose))))
 
 (defclass physical-exposure ()
   ((physical-condition :initarg :physical-condition :initform nil :reader physical-condition)

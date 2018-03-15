@@ -40,7 +40,7 @@
                                (cl-tf:rotation pose)))))
 
 (defun move-arm-pose (arm pose)
-  (let* (pose (ensure-pose-stamped pose))
+  (let* ((pose (ensure-pose-stamped pose)))
     (cpl-impl:with-failure-handling
       ((cram-common-failures:actionlib-action-timed-out (e)
          (declare (ignore e))
