@@ -48,7 +48,24 @@
 (defparameter *physical-exposures* (cpl-impl:make-fluent :name :physical-exposures :value nil))
 
 (defun check-physical-exposure (exposures actees instrument physical-condition)
-  nil)
+  (let* ((actees (if (listp actees) actees (list actees)))
+         (exposures (mapcar (lambda (exposure)
+                              (let* ((c-actees (actee exposure))
+                                     (c-actees (if (listp actee) actee (list actee))))
+                                (when (and (or (equal instrument t) (equal instrument (instrument exposure))
+                                           (or (equal physical-condition t) (equal physical-condition (physical-condition exposure)))
+                                           (or (equal actees (list t)) (intersection actees c-actees :test #'equal)))
+                                  exposure)))
+                            exposures))
+         (exposures (remove-if #'null exposures))
+         (rem-actees (reduce (lambda (actees exposure)
+                               (let* ((actee (actee exposure))
+                                      (actee (if (listp actee) actee (list actee))))
+                                 (append actees actee)))
+                             exposures
+                             :initial-value nil)))
+    (or (equal actees (list t)) (equal (set-difference actees rem-actees :test #'equal) nil))))
+
 
 (defun init-physical-exposures ()
   (setf (cpl-impl:value *physical-exposures*)
@@ -77,7 +94,8 @@
       (establish-kinematic-controllability actees instrument physical-condition)
       (press-blender-button :left)
       (start-simulate actees physical-condition)
-      (establish-kinematic-controllability "milkshake" instrument nil)
+      ;;;(establish-kinematic-controllability "milkshake" instrument nil)
+      (assert-kinematic-controllability "milkshake" instrument nil)
       (setf (cpl-impl:value *physical-exposures*)
             (cons (make-instance 'physical-exposure
                                  :physical-condition physical-condition

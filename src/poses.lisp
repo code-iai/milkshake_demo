@@ -76,7 +76,7 @@
 (defparameter milk-carton-to-pouring (cl-tf:make-transform (cl-tf:make-3d-vector 0.036 0 0.126) null-quat))
 (defparameter bowl-to-pouring (cl-tf:make-transform (cl-tf:make-3d-vector 0.118 0 0.043) null-quat))
 
-(defparameter blender-bowl-entrance (cl-tf:make-transform (cl-tf:make-3d-vector 0 0 0.12) null-quat))
+(defparameter blender-bowl-entrance (cl-tf:make-transform (cl-tf:make-3d-vector 0 0 0.14) null-quat))
 (defparameter mug-entrance (cl-tf:make-transform (cl-tf:make-3d-vector 0 0 0.08) null-quat))
 
 (defparameter *grasp-poses* `(("banana" . ,grasp-banana)
