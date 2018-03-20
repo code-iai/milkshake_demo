@@ -51,11 +51,11 @@
   (let* ((actees (if (listp actees) actees (list actees)))
          (exposures (mapcar (lambda (exposure)
                               (let* ((c-actees (actee exposure))
-                                     (c-actees (if (listp actee) actee (list actee))))
+                                     (c-actees (if (listp c-actees) c-actees (list c-actees))))
                                 (when (and (or (equal instrument t) (equal instrument (instrument exposure))
                                            (or (equal physical-condition t) (equal physical-condition (physical-condition exposure)))
                                            (or (equal actees (list t)) (intersection actees c-actees :test #'equal)))
-                                  exposure)))
+                                  exposure))))
                             exposures))
          (exposures (remove-if #'null exposures))
          (rem-actees (reduce (lambda (actees exposure)
@@ -71,7 +71,7 @@
   (setf (cpl-impl:value *physical-exposures*)
         nil))
 
-(start-simulate (actees physical-condition)
+(defun start-simulate (actees physical-condition)
   (mapcar (lambda (actee)
             (cond
               ((and (equal physical-condition "blend") (equal actee "banana"))

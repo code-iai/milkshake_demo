@@ -81,7 +81,7 @@
                              :initial-value nil)))
     (or (equal actees (list t)) (equal (set-difference actees rem-actees :test #'equal) nil))))
 
-(defun init-kinematic-controllabilities
+(defun init-kinematic-controllabilities ()
   (setf (cpl-impl:value *kinematic-controllabilities*)
         (list (make-instance 'kinematic-controllability
                              :intention nil
