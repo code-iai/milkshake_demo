@@ -37,7 +37,7 @@
 
 (defparameter grasp-banana (cl-tf:make-transform (cl-tf:make-3d-vector 0 0 0) top-grasp))
 (defparameter grasp-blender-bowl (cl-tf:make-transform (cl-tf:make-3d-vector -0.124 0 0.025) fwd-grasp))
-(defparameter grasp-bowl (cl-tf:make-transform (cl-tf:make-3d-vector -0.118 0 0.042) top-grasp))
+(defparameter grasp-bowl (cl-tf:make-transform (cl-tf:make-3d-vector -0.118 0 0.042) fwd-grasp))
 (defparameter grasp-milk-carton (cl-tf:make-transform (cl-tf:make-3d-vector 0 0 0) fwd-grasp))
 (defparameter grasp-mug (cl-tf:make-transform (cl-tf:make-3d-vector -0.063 0 0.009) fwd-grasp))
 
@@ -51,8 +51,8 @@
                                          (cl-tf:make-transform (cl-tf:make-3d-vector  0.04  0.04 -0.027) (cl-tf:euler->quaternion :ax 0.1 :ay -0.25))))
 (defparameter strawberries-in-blender-bowl (list (cl-tf:make-transform (cl-tf:make-3d-vector  0.08  0    -0.027) (cl-tf:euler->quaternion :ax 0.1 :ay -0.1))
                                                  (cl-tf:make-transform (cl-tf:make-3d-vector  0.02  0.07 -0.027) (cl-tf:euler->quaternion :ax 0.2 :ay -0.1))
-                                                 (cl-tf:make-transform (cl-tf:make-3d-vector -0.06  0.05 -0.027) (cl-tf:euler->quaternion :ax 0.05 :ay -0.15))
-                                                 (cl-tf:make-transform (cl-tf:make-3d-vector -0.06 -0.05 -0.027) (cl-tf:euler->quaternion :ax 0.0 :ay -0.3))
+                                                 (cl-tf:make-transform (cl-tf:make-3d-vector -0.05  0.05 -0.027) (cl-tf:euler->quaternion :ax 0.05 :ay -0.15))
+                                                 (cl-tf:make-transform (cl-tf:make-3d-vector -0.05 -0.05 -0.027) (cl-tf:euler->quaternion :ax 0.0 :ay -0.3))
                                                  (cl-tf:make-transform (cl-tf:make-3d-vector  0.02 -0.07 -0.027) (cl-tf:euler->quaternion :ax 0.1 :ay -0.25))))
 
 (defparameter hiding-pose (cl-tf:make-transform-stamped "map" "map" 0 (cl-tf:make-3d-vector 0 0 0) (cl-tf:euler->quaternion)))
@@ -65,13 +65,14 @@
 
 (defparameter floor-level-map 0.9)
 
-(defparameter init-banana (cl-tf:make-transform-stamped "map" "banana" 0 (cl-tf:make-3d-vector 0.9 0.25 (- floor-level-map floor-level-banana)) null-quat))
+(defparameter init-banana (cl-tf:make-transform-stamped "map" "banana" 0 (cl-tf:make-3d-vector 0.75 0.25 (- floor-level-map floor-level-banana)) null-quat))
 (defparameter init-blender-device (cl-tf:make-transform-stamped "map" "blender-device" 0 (cl-tf:make-3d-vector 0.9 0 (- floor-level-map floor-level-blender-device)) null-quat))
-(defparameter init-bowl (cl-tf:make-transform-stamped "map" "bowl" 0 (cl-tf:make-3d-vector 0.9 0.5 (- floor-level-map floor-level-bowl)) null-quat))
-(defparameter init-milk-carton (cl-tf:make-transform-stamped "map" "milk-carton" 0 (cl-tf:make-3d-vector 0.9 -0.25 (- floor-level-map floor-level-milk-carton)) null-quat))
-(defparameter init-mug (cl-tf:make-transform-stamped "map" "mug" 0 (cl-tf:make-3d-vector 0.9 -0.5 (- floor-level-map floor-level-mug)) null-quat))
+(defparameter init-bowl (cl-tf:make-transform-stamped "map" "bowl" 0 (cl-tf:make-3d-vector 0.75 0.5 (- floor-level-map floor-level-bowl)) null-quat))
+(defparameter init-milk-carton (cl-tf:make-transform-stamped "map" "milk-carton" 0 (cl-tf:make-3d-vector 0.75 -0.25 (- floor-level-map floor-level-milk-carton)) null-quat))
+(defparameter init-mug (cl-tf:make-transform-stamped "map" "mug" 0 (cl-tf:make-3d-vector 0.75 -0.5 (- floor-level-map floor-level-mug)) null-quat))
 
 (defparameter blender-device-to-bowl (cl-tf:make-transform (cl-tf:make-3d-vector -0.017 0 0.129) null-quat))
+(defparameter banana-to-pouring (cl-tf:make-transform (cl-tf:make-3d-vector -0.11 0 0) null-quat))
 (defparameter blender-bowl-to-pouring (cl-tf:make-transform (cl-tf:make-3d-vector 0.127 0 0.074) null-quat))
 (defparameter milk-carton-to-pouring (cl-tf:make-transform (cl-tf:make-3d-vector 0.036 0 0.126) null-quat))
 (defparameter bowl-to-pouring (cl-tf:make-transform (cl-tf:make-3d-vector 0.118 0 0.043) null-quat))

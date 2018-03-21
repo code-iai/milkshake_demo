@@ -30,7 +30,7 @@
 (in-package :milkshake-demo)
 
 (defclass affecting-schema ()
-  ((actee :initarg :actee :initform nil :reader actee)))
+  ((actee :initarg :actee :initform nil :accessor actee)))
 
 (defclass instrumental-schema (affecting-schema)
   ((instrument :initarg :instrument :initform nil :accessor instrument)))
@@ -62,11 +62,11 @@
 
 (defparameter *kinematic-controllabilities* (cpl-impl:make-fluent :name :kinematic-controllabilities :value nil))
 
-(defun check-kinematic-controllabilities (controllabilities actees instrument intention)
+(defun check-kinematic-controllability (controllabilities actees instrument intention)
   (let* ((actees (if (listp actees) actees (list actees)))
          (controllabilities (mapcar (lambda (controllability)
                                       (let* ((c-actees (actee controllability))
-                                             (c-actees (if (listp actee) actee (list actee))))
+                                             (c-actees (if (listp c-actees) c-actees (list c-actees))))
                                         (when (and (or (equal instrument t) (equal instrument (instrument controllability)))
                                                    (or (equal intention t) (equal intention (intention controllability)))
                                                    (or (equal actees (list t)) (intersection actees c-actees :test #'equal)))
@@ -117,7 +117,7 @@
                              :actee "milk"))))
 
 (defun terminate-kinematic-controllability (actees instrument intention)
-  (let* ((already-established (check-kinematic-controllability (cpl-impl:value *kinematic-controllabilities*) actees instrument instrument)))
+  (let* ((already-established (check-kinematic-controllability (cpl-impl:value *kinematic-controllabilities*) actees instrument intention)))
     (when already-established
       (setf (cpl-impl:value *kinematic-controllabilities*)
             (remove-instrumental-schema (cpl-impl:value *kinematic-controllabilities*) actees instrument)))))
@@ -136,7 +136,7 @@
 (defun find-holds (controllabilities instrument)
   (let* ((actees (reduce (lambda (actees controllability)
                            (let* ((c-actees (actee controllability))
-                                  (c-actees (if (listp c-actee) c-actee (list c-actee))))
+                                  (c-actees (if (listp c-actees) c-actees (list c-actees))))
                              (if (equal instrument (instrument controllability))
                                (append actees c-actees)
                                actees)))
@@ -169,7 +169,7 @@
                                                     (cl-tf:rotation lifted-pose)))
          (contained (if (listp contained) contained (list contained)))
          (contained (mapcar (lambda (object)
-                              (unless (or (equal object "milk") (equal object "milkshake"))
+                              (unless (or  (equal object "bowl") (equal object "blender-bowl") (equal object "milk-carton") (equal object "banana") (equal object "milk") (equal object "milkshake"))
                                 object))
                             contained))
          (contained (remove-if #'null contained))
@@ -210,21 +210,27 @@
                                      mug-entrance))
          (old-container-pouring-inv (if (equal "blender-bowl" old-container)
                                       blender-bowl-to-pouring
-                                      (if (equal "milk-carton-to-pouring" old-container)
+                                      (if (equal "milk-carton" old-container)
                                         milk-carton-to-pouring
-                                        bowl-to-pouring)))
+                                        (if (equal "bowl" old-container) 
+                                          bowl-to-pouring
+                                          banana-to-pouring))))
          (old-container-pouring-inv (cl-tf:transform-inv old-container-pouring-inv))
-         (old-container-grab-inv (cl-tf:transform-inv (cdr (assoc container *grasp-poses* :test #'equal))))
+         (old-container-grab (cdr (assoc old-container *grasp-poses* :test #'equal)))
          (pouring-poses (mapcar (lambda (angle)
-                                  (cl-tf:make-transform (cl-tf:make-3d-vector 0 0 0)
-                                                        (cl-tf:euler->quaternion :ay angle)))
+                                  (let* ((angle (if (equal "banana" old-container)
+                                                  (/ pi -2)
+                                                  angle)))
+                                    (cl-tf:make-transform (cl-tf:make-3d-vector 0 0 0)
+                                                          (cl-tf:euler->quaternion :ay angle))))
                                 (list 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1)))
          (pouring-poses (mapcar (lambda (pouring-pose)
-                                  (let* ((pouring-pose (cl-tf:transform* new-container-pose new-container-entry-pose pouring-pose old-container-pouring-inv old-container-grab-inv)))
+                                  (let* ((pouring-pose (cl-tf:transform* new-container-pose new-container-entry-pose pouring-pose old-container-pouring-inv old-container-grab)))
                                     (cl-tf:make-transform-stamped "map" tool-frame 0
                                                                   (cl-tf:translation pouring-pose)
                                                                   (cl-tf:rotation pouring-pose))))
-                                pouring-poses)))
+                                pouring-poses))
+         (pouring-poses (if (equal old-container "banana") (list (car pouring-poses)) pouring-poses)))
     (move-arm-poses arm pouring-poses)
     (mapcar (lambda (object)
               (if (equal object "banana")
@@ -232,8 +238,8 @@
                 (if (equal object "strawberry")
                   (place-strawberry-in-blender-bowl))))
             contained)
-    (when (or (equal old-container "bowl") (equal old-container "blender-bowl"))
-      (move-arm-poses arm (reverse pouring-poses))
+    (when (or (equal old-container "bowl") (equal old-container "milk-carton") (equal old-container "blender-bowl"))
+      (move-arm-poses arm (car pouring-poses))
       T)))
 
 (defun place-container (arm container pose)
@@ -267,7 +273,7 @@
 (defun assert-kinematic-controllability (actees instrument intention)
   (let* ((actees (if (listp actees) actees (list actees))))
     (mapcar (lambda (actee)
-              (assert-kinematic-controllability actee instrument intention))
+              (assert-kinematic-controllability-internal actee instrument intention))
             actees)))
 
 (defun establish-kinematic-controllability-internal (actee instrument intention)
@@ -279,15 +285,16 @@
              (arm (first grabbed))
              (cr-holder-ini-pose (second grabbed))
              (cr-holder-needs-placeback (pour-into-container arm cr-holder cr-held instrument)))
-        (when cr-holder-needs-placeback
-          (place-container arm cr-holder cr-holder-ini-pose))
+        (if cr-holder-needs-placeback
+          (place-container arm cr-holder cr-holder-ini-pose)
+          (move-arms-up))
         (terminate-kinematic-controllability cr-held T T)
         (assert-kinematic-controllability-internal cr-held instrument intention)))))
 
 (defun establish-kinematic-controllability (actees instrument intention)
   (let* ((actees (if (listp actees) actees (list actees))))
     (mapcar (lambda (actee)
-              (establish-kinematic-controllability actee instrument intention))
+              (establish-kinematic-controllability-internal actee instrument intention))
             actees)))
 
 

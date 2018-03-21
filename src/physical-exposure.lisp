@@ -75,8 +75,10 @@
   (mapcar (lambda (actee)
             (cond
               ((and (equal physical-condition "blend") (equal actee "banana"))
+                (terminate-kinematic-controllability "banana" "blender-bowl" T)
                 (place-banana-in-hiding))
               ((and (equal physical-condition "blend") (equal actee "strawberry"))
+                (terminate-kinematic-controllability "strawberry" "blender-bowl" T)
                 (place-strawberry-in-hiding))
               (T nil)))
           actees))
