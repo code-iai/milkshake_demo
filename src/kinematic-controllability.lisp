@@ -162,7 +162,7 @@
          (grab-pose-inv (cl-tf:transform-inv grab-pose))
          (lifted-pose (cl-tf:make-transform (cl-tf:make-3d-vector (cl-tf:x (cl-tf:translation grab-pose))
                                                                   (cl-tf:y (cl-tf:translation grab-pose))
-                                                                  (+ (cl-tf:z (cl-tf:translation grab-pose)) 0.2))
+                                                                  (+ (cl-tf:z (cl-tf:translation grab-pose)) 0.8))
                                             (cl-tf:rotation grab-pose)))
          (lifted-pose (cl-tf:make-transform-stamped "map" tool-frame 0
                                                     (cl-tf:translation lifted-pose)
@@ -206,8 +206,12 @@
          (new-container-pose (cpl-impl:value (cdr (assoc new-container *marker-object-fluents* :test #'equal))))
          (new-container-pose (if (listp new-container-pose) (car new-container-pose) new-container-pose))
          (new-container-entry-pose (if (equal new-container "blender-bowl")
-                                     blender-bowl-entrance
-                                     mug-entrance))
+                                     (if (equal arm :left)
+                                       blender-bowl-entrance-left
+                                       blender-bowl-entrance-right)
+                                     (if (equal arm :left)
+                                       mug-entrance-left
+                                       mug-entrance-right)))
          (old-container-pouring-inv (if (equal "blender-bowl" old-container)
                                       blender-bowl-to-pouring
                                       (if (equal "milk-carton" old-container)

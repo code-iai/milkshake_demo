@@ -94,7 +94,7 @@
   (let* ((already-established (check-physical-exposure (cpl-impl:value *physical-exposures*) actees instrument physical-condition)))
     (unless already-established
       (establish-kinematic-controllability actees instrument physical-condition)
-      (press-blender-button :left)
+      (press-blender-button :right)
       (start-simulate actees physical-condition)
       ;;;(establish-kinematic-controllability "milkshake" instrument nil)
       (assert-kinematic-controllability "milkshake" instrument nil)

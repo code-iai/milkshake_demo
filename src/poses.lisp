@@ -50,10 +50,10 @@
                                          (cl-tf:make-transform (cl-tf:make-3d-vector  0.05 -0.03 -0.027) (cl-tf:euler->quaternion :ax 0.0 :ay -0.3))
                                          (cl-tf:make-transform (cl-tf:make-3d-vector  0.04  0.04 -0.027) (cl-tf:euler->quaternion :ax 0.1 :ay -0.25))))
 (defparameter strawberries-in-blender-bowl (list (cl-tf:make-transform (cl-tf:make-3d-vector  0.08  0    -0.027) (cl-tf:euler->quaternion :ax 0.1 :ay -0.1))
-                                                 (cl-tf:make-transform (cl-tf:make-3d-vector  0.02  0.07 -0.027) (cl-tf:euler->quaternion :ax 0.2 :ay -0.1))
-                                                 (cl-tf:make-transform (cl-tf:make-3d-vector -0.05  0.05 -0.027) (cl-tf:euler->quaternion :ax 0.05 :ay -0.15))
-                                                 (cl-tf:make-transform (cl-tf:make-3d-vector -0.05 -0.05 -0.027) (cl-tf:euler->quaternion :ax 0.0 :ay -0.3))
-                                                 (cl-tf:make-transform (cl-tf:make-3d-vector  0.02 -0.07 -0.027) (cl-tf:euler->quaternion :ax 0.1 :ay -0.25))))
+                                                 (cl-tf:make-transform (cl-tf:make-3d-vector  0.02  0.06 -0.027) (cl-tf:euler->quaternion :ax 0.2 :ay -0.1))
+                                                 (cl-tf:make-transform (cl-tf:make-3d-vector -0.035  0.03 -0.027) (cl-tf:euler->quaternion :ax 0.05 :ay -0.15))
+                                                 (cl-tf:make-transform (cl-tf:make-3d-vector -0.035 -0.03 -0.027) (cl-tf:euler->quaternion :ax 0.0 :ay -0.3))
+                                                 (cl-tf:make-transform (cl-tf:make-3d-vector  0.02 -0.06 -0.027) (cl-tf:euler->quaternion :ax 0.1 :ay -0.25))))
 
 (defparameter hiding-pose (cl-tf:make-transform-stamped "map" "map" 0 (cl-tf:make-3d-vector 0 0 0) (cl-tf:euler->quaternion)))
 
@@ -77,8 +77,10 @@
 (defparameter milk-carton-to-pouring (cl-tf:make-transform (cl-tf:make-3d-vector 0.036 0 0.126) null-quat))
 (defparameter bowl-to-pouring (cl-tf:make-transform (cl-tf:make-3d-vector 0.118 0 0.043) null-quat))
 
-(defparameter blender-bowl-entrance (cl-tf:make-transform (cl-tf:make-3d-vector 0 0 0.14) null-quat))
-(defparameter mug-entrance (cl-tf:make-transform (cl-tf:make-3d-vector 0 0 0.08) null-quat))
+(defparameter blender-bowl-entrance-left (cl-tf:make-transform (cl-tf:make-3d-vector -0.05 0.05 0.16) (cl-tf:euler->quaternion :az -1)))
+(defparameter blender-bowl-entrance-right (cl-tf:make-transform (cl-tf:make-3d-vector -0.05 -0.05 0.16) (cl-tf:euler->quaternion :az 1)))
+(defparameter mug-entrance-left (cl-tf:make-transform (cl-tf:make-3d-vector 0 0 0.12) (cl-tf:euler->quaternion :az (- 0.2))))
+(defparameter mug-entrance-right (cl-tf:make-transform (cl-tf:make-3d-vector 0 0 0.12) (cl-tf:euler->quaternion :az 0.2)))
 
 (defparameter *grasp-poses* `(("banana" . ,grasp-banana)
                               ("blender-bowl" . ,grasp-blender-bowl)

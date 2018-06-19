@@ -108,7 +108,7 @@
             ;;  ;;(place-container arm "bowl" init-pose)
             ;;  (roslisp:wait-duration 10)
             ;;  )
-            (establish-physical-exposure (list "strawberry" "milk") "blender-bowl" "blend")
+            (establish-physical-exposure (list "banana" "milk") "blender-bowl" "blend")
             (establish-kinematic-controllability "milkshake" "mug" nil)
             (initial-marker-placement)
             (init-kinematic-controllabilities)
