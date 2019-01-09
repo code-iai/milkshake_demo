@@ -30,11 +30,6 @@
 
 (in-package :milkshake-demo)
 
-
-(defun move-arms-up ()
-  (pr2-pp-plans::park-arms))
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; action_core: Cutting
@@ -49,30 +44,67 @@
 
 (defun cleanup-action-roles (action-roles)
   (let* ((action-roles (mapcar (lambda (action-role)
-                                 (roslisp:with-fields ((role-name role_name) (role-value role_value)) action-role
+                                 (roslisp:with-fields ((role-name role_name) (role-value role_value) (role-values role_values)) action-role
                                    (let* ((point-pos (position #\. role-value))
                                           (role-value (if point-pos
                                                           (subseq role-value 0 point-pos)
                                                           role-value)))
-                                     (list role-name role-value))))
+                                     (list role-name role-value role-values))))
                                action-roles)))
     action-roles))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun perform-mixing (milkshake-type)
+(cpl-impl:def-cram-function perform-mixing (milkshake-type)
   )
 (defun perform-mixing-get-args (&rest action-roles)
   )
+
+(cpl-impl:def-cram-function perform-cooking (milkshake-type)
+    ;;(cram-process-modules:with-process-modules-running (pr2-pms::pr2-arms-pm pr2-pms::pr2-grippers-pm pr2-pms::pr2-ptu-pm pr2-pms::pr2-base-pm)
+  (cram-process-modules:with-process-modules-running (pr2-pms::pr2-arms-pm)
+      (initial-marker-placement)
+      (move-arms-up)
+      (establish-physical-exposure (list milkshake-type "milk") "blender-bowl" "blend")
+      (establish-kinematic-controllability "milkshake" "mug" nil)
+      (initial-marker-placement)
+      (init-kinematic-controllabilities)
+      (init-physical-exposures)
+      ;;)
+   ))
+
+(defun perform-cooking-get-args (&rest action-roles)
+  (cram-process-modules:with-process-modules-running (pr2-pms::pr2-arms-pm)
+    (let* ((action-roles (cleanup-action-roles action-roles))
+           (item-type (car (cdr (assoc "type" action-roles :test #'equal))))
+           (milkshake-type (car (cdr (assoc "flavor" action-roles :test #'equal))))
+           (should-run-plan (when (and (equal item-type "milkshake")
+                                       (position milkshake-type '("strawberry" "banana") :test #'equal))
+                                  T))
+           (args (when should-run-plan
+                   (list milkshake-type)))
+           (msg (if should-run-plan
+                  (format nil "cooking of a ~a ~a~%" milkshake-type item-type)
+                  (format nil "unrecognized recipe to cook or don't have ingredients for ~a ~a~%" milkshake-type item-type)))
+           (plan-string (if should-run-plan
+                          (format nil "(perform-cooking ~a ~a)~%" item-type milkshake-type)
+                          (format nil ""))))
+      (values (if should-run-plan 0 -1)
+              args
+              msg
+              plan-string))))
 
 (defun cancel-function ()
   (cram-process-modules:with-process-modules-running (pr2-pms::pr2-arms-pm)
     (move-arms-up)
     )
-  (initial-marker-placement))
+  (initial-marker-placement)
+  (init-kinematic-controllabilities)
+  (init-physical-exposures))
 
 (defparameter *pracsimserver-plan-matchings*
-              (list (cons "Mixing" (list #'perform-mixing #'perform-mixing-get-args))))
+              (list (cons "Mixing" (list #'perform-mixing #'perform-mixing-get-args))
+                    (cons "Cooking" (list #'perform-cooking #'perform-cooking-get-args))))
 
 (defun start-scenario ()
   (roslisp:ros-info (milkshake-demo) "Starting up ...")
@@ -85,6 +117,8 @@
   (prac2cram:prac2cram-server *pracsimserver-plan-matchings* #'cancel-function)
   (roslisp:ros-info (milkshake-demo) "Started a prac2cram server")
   (initial-marker-placement)
+  (init-kinematic-controllabilities)
+  (init-physical-exposures)
   (cpl-impl:top-level
     (cram-process-modules:with-process-modules-running (pr2-pms::pr2-arms-pm)
       (move-arms-up)))
@@ -95,27 +129,27 @@
          )
     (loop
       (let ((c (rem (+ a b) 97)))
-        (initial-marker-placement)
-        (init-kinematic-controllabilities)
-        (init-physical-exposures)
-        (cpl-impl:top-level
-          (cram-process-modules:with-process-modules-running (pr2-pms::pr2-arms-pm pr2-pms::pr2-grippers-pm pr2-pms::pr2-ptu-pm pr2-pms::pr2-base-pm)
-            ;;(press-blender-button :left)
-            ;;(let* ((grabbed (grab-and-lift-container "banana" "banana"))
-            ;;       (arm (first grabbed))
-            ;;       (init-pose (second grabbed)))
-            ;;  (pour-into-container arm "banana" "banana" "blender-bowl")
-            ;;  ;;(place-container arm "bowl" init-pose)
-            ;;  (roslisp:wait-duration 10)
-            ;;  )
-            (establish-physical-exposure (list "banana" "milk") "blender-bowl" "blend")
-            (establish-kinematic-controllability "milkshake" "mug" nil)
-            (initial-marker-placement)
-            (init-kinematic-controllabilities)
-            (init-physical-exposures)
-            ))
-        (roslisp:wait-duration 1)
-        ;;(mapcar #'publish-marker-object *marker-object-fluents*)
+        ;;(initial-marker-placement)
+        ;;(init-kinematic-controllabilities)
+        ;;(init-physical-exposures)
+        ;;(cpl-impl:top-level
+        ;;  (cram-process-modules:with-process-modules-running (pr2-pms::pr2-arms-pm pr2-pms::pr2-grippers-pm pr2-pms::pr2-ptu-pm pr2-pms::pr2-base-pm)
+        ;;    ;;(press-blender-button :left)
+        ;;    ;;(let* ((grabbed (grab-and-lift-container "banana" "banana"))
+        ;;    ;;       (arm (first grabbed))
+        ;;    ;;       (init-pose (second grabbed)))
+        ;;    ;;  (pour-into-container arm "banana" "banana" "blender-bowl")
+        ;;    ;;  ;;(place-container arm "bowl" init-pose)
+        ;;    ;;  (roslisp:wait-duration 10)
+        ;;    ;;  )
+        ;;    (establish-physical-exposure (list "banana" "milk") "blender-bowl" "blend")
+        ;;    (establish-kinematic-controllability "milkshake" "mug" nil)
+        ;;    (initial-marker-placement)
+        ;;    (init-kinematic-controllabilities)
+        ;;    (init-physical-exposures)
+        ;;    ))
+        (roslisp:wait-duration 2.5)
+        (mapcar #'publish-object-marker *object-names*)
         (format t "Tick-tock ~a: ~a.~%" s c)
         (setf s (+ s 1))
         (setf s (if (<= 100 s) 0 s))
