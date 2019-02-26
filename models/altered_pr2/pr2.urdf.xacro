@@ -13,7 +13,7 @@
   <xacro:include filename="$(find pr2_description)/urdf/upper_arm_v0/upper_arm.urdf.xacro" />
   <xacro:include filename="$(find pr2_description)/urdf/forearm_v0/forearm.urdf.xacro" />
   <!-- PR2 gripper -->
-  <xacro:include filename="$(find pr2_moveit_node)/models/altered_pr2/gripper.urdf.xacro" />
+  <xacro:include filename="$(find milkshake_demo)/models/altered_pr2/gripper.urdf.xacro" />
   <!-- PR2 head -->
   <xacro:include filename="$(find pr2_description)/urdf/head_v0/head.urdf.xacro" />
   <!-- PR2 tilting laser mount -->
