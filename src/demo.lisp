@@ -75,7 +75,8 @@
 
 (defun perform-cooking-get-args (&rest action-roles)
   (cram-process-modules:with-process-modules-running (pr2-pms::pr2-arms-pm)
-    (let* ((action-roles (cleanup-action-roles action-roles))
+    (let* ((old-action-roles action-roles)
+           (action-roles (cleanup-action-roles action-roles))
            (item-type (car (cdr (assoc "type" action-roles :test #'equal))))
            (milkshake-type (car (cdr (assoc "flavor" action-roles :test #'equal))))
            (should-run-plan (when (and (equal item-type "milkshake")
@@ -85,7 +86,7 @@
                    (list milkshake-type)))
            (msg (if should-run-plan
                   (format nil "cooking of a ~a ~a~%" milkshake-type item-type)
-                  (format nil "unrecognized recipe to cook or don't have ingredients for ~a ~a~%" milkshake-type item-type)))
+                  (format nil "unrecognized recipe to cook or don't have ingredients for ~a ~a~%ACTION ROLES ~a~%CLEANED ~a~%" milkshake-type item-type old-action-roles action-roles)))
            (plan-string (if should-run-plan
                           (format nil "(perform-cooking ~a ~a)~%" item-type milkshake-type)
                           (format nil ""))))
